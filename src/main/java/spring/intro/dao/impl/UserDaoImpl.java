@@ -2,7 +2,6 @@ package spring.intro.dao.impl;
 
 import spring.intro.dao.UserDao;
 import spring.intro.model.User;
-import spring.intro.util.HibernateUtil;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Repository;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
+
     @Override
     public void add(User user) {
         Transaction transaction = null;
