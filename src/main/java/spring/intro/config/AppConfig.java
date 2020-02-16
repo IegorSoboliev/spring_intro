@@ -1,7 +1,5 @@
 package spring.intro.config;
 
-import spring.intro.model.User;
-
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -14,12 +12,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import spring.intro.model.User;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @ComponentScan(basePackages = {
         "spring.intro.dao",
-        "spring.intro.service"
+        "spring.intro.service",
+        "spring.intro.controllers"
 })
 public class AppConfig {
     @Autowired

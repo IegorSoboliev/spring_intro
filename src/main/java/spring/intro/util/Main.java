@@ -1,12 +1,11 @@
 package spring.intro.util;
 
-import spring.intro.config.AppConfig;
-import spring.intro.model.User;
-import spring.intro.service.UserService;
-
 import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import spring.intro.config.AppConfig;
+import spring.intro.model.User;
+import spring.intro.service.UserService;
 
 public class Main {
 
