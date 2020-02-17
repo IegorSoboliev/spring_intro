@@ -1,15 +1,16 @@
 package spring.intro.controllers;
 
-import java.util.ArrayList;
+import spring.intro.model.User;
+import spring.intro.service.UserService;
+import spring.intro.util.UserResponseDto;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import spring.intro.model.User;
-import spring.intro.service.UserService;
-import spring.intro.util.UserResponseDto;
 
 @RestController
 @RequestMapping("/user")
@@ -48,18 +49,15 @@ public class UserController {
     @GetMapping("/{userId}")
     private UserResponseDto get(@RequestParam(name = "userId") Long userId) {
         User user = userService.get(userId);
-        UserResponseDto userResponseDto = transformToUserResponseDto(user);
-        return userResponseDto;
+        return transformToUserResponseDto(user);
     }
 
     @GetMapping("/")
     private List<UserResponseDto> getAll() {
-        List<UserResponseDto> allUserDto = new ArrayList<>();
-        for (User user : userService.listUsers()) {
-            UserResponseDto userResponseDto = transformToUserResponseDto(user);
-            allUserDto.add(userResponseDto);
-        }
-        return allUserDto;
+        return userService.listUsers()
+                .stream()
+                .map(this::transformToUserResponseDto)
+                .collect(Collectors.toList());
     }
 
     private UserResponseDto transformToUserResponseDto (User user) {
