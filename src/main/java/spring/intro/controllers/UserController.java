@@ -48,7 +48,7 @@ public class UserController {
     @GetMapping("/{userId}")
     private UserResponseDto get(@RequestParam(name = "userId") Long userId) {
         User user = userService.get(userId);
-        UserResponseDto userResponseDto = new UserResponseDto(user);
+        UserResponseDto userResponseDto = transformToUserResponseDto(user);
         return userResponseDto;
     }
 
@@ -56,19 +56,17 @@ public class UserController {
     private List<UserResponseDto> getAll() {
         List<UserResponseDto> allUserDto = new ArrayList<>();
         for (User user : userService.listUsers()) {
-            allUserDto.add(new UserResponseDto(user));
+            UserResponseDto userResponseDto = transformToUserResponseDto(user);
+            allUserDto.add(userResponseDto);
         }
         return allUserDto;
     }
 
-//    я зробив у UserDto додатковий конкструктор, який приймає User. Якщо це неправильно,
-//    ось окремий метод для трансформації User у UserDto. Видалю за першої твоєї вимоги:))).
-
-//    private UserResponseDto transformToUserResponseDto (User user) {
-//        UserResponseDto userResponseDto = new UserResponseDto();
-//        userResponseDto.setId(user.getId());
-//        userResponseDto.setEmail(user.getEmail());
-//        userResponseDto.setPassword(user.getPassword());
-//        return userResponseDto;
-//    }
+    private UserResponseDto transformToUserResponseDto (User user) {
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setId(user.getId());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setPassword(user.getPassword());
+        return userResponseDto;
+    }
 }

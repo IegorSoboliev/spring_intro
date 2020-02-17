@@ -21,12 +21,6 @@ public class UserDaoImpl implements UserDao {
     public User get(Long userId) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(User.class, userId);
-//            Далі - довша версія. Працюють обидві. Довшу так само видалю на першу твою вимогу)))
-//            CriteriaBuilder cb = session.getCriteriaBuilder();
-//            CriteriaQuery<User> cq = cb.createQuery(User.class);
-//            Root<User> root = cq.from(User.class);
-//            cq.where(cb.equal(root.get("id"), userId));
-//            return session.createQuery(cq).uniqueResult();
         } catch (Exception e) {
             throw new RuntimeException("Cannot show user from database", e);
         }
