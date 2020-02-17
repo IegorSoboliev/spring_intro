@@ -1,7 +1,5 @@
 package spring.intro.config;
 
-import spring.intro.model.User;
-
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -14,12 +12,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import spring.intro.model.User;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @ComponentScan(basePackages = {
         "spring.intro.dao",
-        "spring.intro.service"
+        "spring.intro.service",
+        "spring.intro.controllers"
 })
 public class AppConfig {
     @Autowired
@@ -41,7 +41,8 @@ public class AppConfig {
         sessionFactoryBean.setDataSource(getDataSource());
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.hbm2ddl.auto",
+                environment.getProperty("hibernate.hbm2ddl.auto"));
         sessionFactoryBean.setHibernateProperties(properties);
         sessionFactoryBean.setAnnotatedClasses(User.class);
         return sessionFactoryBean;
