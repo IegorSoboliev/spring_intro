@@ -64,7 +64,6 @@ public class UserController {
 
     private UserResponseDto transformToUserResponseDto (User user) {
         UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setId(user.getId());
         userResponseDto.setEmail(user.getEmail());
         userResponseDto.setPassword(user.getPassword());
         return userResponseDto;
